@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import markdownit from 'markdown-it'
-import ThemeSwap from './components/ThemeSwap.vue'
+import ThemeSwap from '@/components/ThemeSwap.vue'
 
-const text = ref('hello')
+const text = ref(`# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+`)
 const marked = ref('')
 
 const md = markdownit({
@@ -11,9 +17,12 @@ const md = markdownit({
 });
 
 const updateText = () => {
-  marked.value = md.render(text.value)
+  marked.value = md.render(text.value);
 }
 
+onMounted(() => {
+  updateText();
+})
 </script>
 
 <template>
